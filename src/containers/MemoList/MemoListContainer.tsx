@@ -23,7 +23,7 @@ const MemoListContainer: React.FC<{}> = ({ match }: any) => {
         if (labelId) {
             dispatch(LabelActions.selectLabel(labelId))
         }
-    }, [match.params])
+    }, [match])
 
     const labels = useSelector((state: any) => getOr([], 'label.labels')(state))
     const memos = useSelector((state: any) => getOr([], 'memo.memos')(state))
@@ -35,7 +35,10 @@ const MemoListContainer: React.FC<{}> = ({ match }: any) => {
     const handleSelectLabel = useCallback((id: string) => history.push(`/label/${ id }`), [])
     const handleSelectMemo = useCallback((memoId: string) => history.push(`/memo/${ labelId }/${ memoId }`), [])
 
-    const handleRemoveLabel = useCallback((id: string) => dispatch(LabelActions.removeLabel(id)), [])
+    const handleRemoveLabel = useCallback((id: string) => {
+        dispatch(LabelActions.removeLabel(id))
+        history.push('/')
+    }, [])
     const handleUpdateLabel = useCallback((payload: any) => dispatch(LabelActions.updateLabel(payload)), [])
 
     const handleSettingMemo = (_id: string) => dispatch(LabelActions.addMemos({ _id, memoIds }))
@@ -49,18 +52,21 @@ const MemoListContainer: React.FC<{}> = ({ match }: any) => {
                 onInsert={ handleCreateLabel }
                 onSelect={ handleSelectLabel }
             />
-
-            <MemoList
-                _id={ label._id }
-                items={ labelId ? label.memos : memos }
-                label={ label.title }
-                onSetting={ handleSettingMemo }
-                onUnSetting={ handleUnSettingMemo }
-                onCheck={ ({ id, checked }: any) => checked ? dispatch(MemoActions.checkMemo(id)) : dispatch(MemoActions.uncheckMemo(id)) }
-                onRemove={ handleRemoveLabel }
-                onUpdate={ handleUpdateLabel }
-                onSelect={ handleSelectMemo }
-            />
+            {
+                label ? (
+                    <MemoList
+                        _id={ label._id }
+                        items={ label.memos }
+                        label={ label.title }
+                        onSetting={ handleSettingMemo }
+                        onUnSetting={ handleUnSettingMemo }
+                        onCheck={ ({ id, checked }: any) => checked ? dispatch(MemoActions.checkMemo(id)) : dispatch(MemoActions.uncheckMemo(id)) }
+                        onRemove={ handleRemoveLabel }
+                        onUpdate={ handleUpdateLabel }
+                        onSelect={ handleSelectMemo }
+                    />
+                ) : null
+            }
         </Container>
     )
 }

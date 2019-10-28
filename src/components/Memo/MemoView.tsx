@@ -1,6 +1,6 @@
 import React, { useState, useCallback, memo, Fragment } from 'react'
 import { Button, Popconfirm } from 'antd'
-import {format, isValid} from 'date-fns'
+import { format, isValid } from 'date-fns'
 
 import { Container, Header, Input, DateWrapper, UpdateDate, Textarea } from './MemoView.style'
 import { IViewProps } from './Memo.spec'
@@ -8,7 +8,7 @@ import { IViewProps } from './Memo.spec'
 const MemoView = memo(({ _id, updatedAt, title, content, onRemove, onUpdate }: IViewProps) => {
     const [editableTitle, setEditableTitle] = useState(false)
     const [editableContent, setEditableContent] = useState(false)
-    const [_title, setTitle] = useState(title)
+    const [_title, setTitle] = useState(() => title)
     const [_content, setContent] = useState(content)
 
     const toggleEditableTitle = useCallback(() => setEditableTitle(!editableTitle), [])
@@ -22,8 +22,8 @@ const MemoView = memo(({ _id, updatedAt, title, content, onRemove, onUpdate }: I
             <Fragment>
                 <Header>
                     {
-                        toggleEditableTitle ?
-                            ( <Input value={ _title } onChange={ (e: any) => inputTitle(e.target.value)} /> ) :
+                        editableTitle ?
+                            ( <Input value={ _title } onChange={ (e: any) => inputTitle(e.target.value)} onFocus={ toggleEditableTitle } /> ) :
                             ( <h3 onClick={ toggleEditableTitle }>{ title }</h3> )
                     }
                     <Button.Group>

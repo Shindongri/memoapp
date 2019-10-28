@@ -8,7 +8,6 @@ import { LabelActions, FETCH_LABEL_REQUEST } from '../../modules/label'
 import { FETCH_MEMO_REQUEST } from '../../modules/memo'
 
 import LabelList from '../../components/Label/LabelList'
-import MemoList from '../../components/Memo/MemoList'
 
 const IndexContainer: React.FC<{}> = memo(() => {
     const dispatch = useDispatch()
@@ -24,7 +23,6 @@ const IndexContainer: React.FC<{}> = memo(() => {
 
     const handleCreateLabel = useCallback(payload => dispatch(LabelActions.createLabel(payload)), [])
     const handleSelectLabel = useCallback((id: string) => history.push(`/label/${ id }`), [])
-    // const handleSelectMemo = useCallback((id: string) => history.push(`/memo/${ labelId }/${ id }`), [])
 
     return (
         <Container>
@@ -34,14 +32,6 @@ const IndexContainer: React.FC<{}> = memo(() => {
                 onInsert={ handleCreateLabel }
                 onSelect={ handleSelectLabel }
             />
-            {/*<MemoList*/}
-            {/*    _id={ labels[0]._id }*/}
-            {/*    items={ memos }*/}
-            {/*    label={ labels[0].title }*/}
-            {/*    onRemove={ () => {} }*/}
-            {/*    onUpdate={ () => {} }*/}
-            {/*    onSelect={ () => {} }*/}
-            {/*/>*/}
         </Container>
     )
 })

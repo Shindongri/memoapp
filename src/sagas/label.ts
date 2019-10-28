@@ -10,6 +10,7 @@ import {
     UPDATE_LABEL_REQUEST,
     FETCH_LABEL_REQUEST, ADD_MEMOS_REQUEST, REMOVE_MEMOS_REQUEST,
 } from '../modules/label'
+import {REMOVE_MEMO_REQUEST, UPDATE_MEMO_REQUEST} from '../modules/memo'
 
 const fetchLabel = function* () {
     try {
@@ -19,7 +20,7 @@ const fetchLabel = function* () {
             yield put(LabelActions.setLabels(data))
         }
     } catch (e) {
-        yield put({ type: '', e })
+        console.error(e)
     }
 }
 
@@ -31,7 +32,7 @@ const detailLabel = function* ({ payload }: any) {
             yield put(LabelActions.setLabel(data))
         }
     } catch (e) {
-        yield put({ type: '', e })
+        console.error(e)
     }
 }
 
@@ -43,7 +44,7 @@ function* createLabel({ payload }: any) {
             yield put(LabelActions.addLabels(data))
         }
     } catch (e) {
-        yield put({ type: '', e })
+        console.error(e)
     }
 }
 
@@ -55,7 +56,7 @@ function* updateLabel({ payload }: any) {
             yield fetchLabel()
         }
     } catch (e) {
-        yield put({ type: '', e })
+        console.error(e)
     }
 }
 
@@ -67,6 +68,7 @@ const removeLabel = function* ({ payload }: any) {
             yield put(LabelActions.removeLabel(_id))
         }
     } catch (e) {
+        console.error(e)
     }
 }
 
@@ -75,10 +77,10 @@ const addMemos = function* ({ payload: { _id, memoIds } }: any) {
         const { status, statusText } = yield call(addMemosAPI, { _id, memoIds })
 
         if (status === 200 && statusText === 'OK') {
-
+            yield fetchLabel()
         }
     } catch (e) {
-        yield put({ type: '', e })
+        console.error(e)
     }
 }
 
@@ -87,10 +89,10 @@ const removeMemos = function* ({ payload: { _id, memoIds } }: any) {
         const { status, statusText } = yield call(removeMemosAPI, { _id, memoIds })
 
         if (status === 200 && statusText === 'OK') {
-
+            yield fetchLabel()
         }
     } catch (e) {
-        yield put({ type: '', e })
+        console.error(e)
     }
 }
 
@@ -100,7 +102,7 @@ export default function* labelSaga() {
         takeEvery([CREATE_LABEL_REQUEST], createLabel),
         takeEvery([UPDATE_LABEL_REQUEST], updateLabel),
 
-        takeEvery([SELECT_LABEL_REQUEST], detailLabel),
+        takeEvery([SELECT_LABEL_REQUEST, REMOVE_MEMO_REQUEST], detailLabel),
         takeEvery([REMOVE_LABEL_REQUEST], removeLabel),
         takeEvery([ADD_MEMOS_REQUEST], addMemos),
         takeEvery([REMOVE_MEMOS_REQUEST], removeMemos)

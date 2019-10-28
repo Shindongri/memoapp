@@ -64,7 +64,7 @@ export const RightContent = styled.div`
     justify-content: space-between;
 `
 
-export const Title = styled.h2``
+export const Title = styled.h3``
 
 export const Description = styled.p``
 

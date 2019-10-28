@@ -7,13 +7,14 @@ const LabelList = memo(({ totalCount, items, onInsert, onSelect }: IProps) => {
     const [open, setOpen] = useState<boolean>(false)
     const [title, setTitle] = useState<string | null>(null)
 
-    const handleOpen = useCallback(() => setOpen(true), ['open'])
-    const handleClose = useCallback(() => setOpen(false), ['open'])
-    const handleInput = useCallback((v: string) => setTitle(v), ['title'])
+    const handleOpen = useCallback(() => setOpen(true), [])
+    const handleClose = useCallback(() => setOpen(false), [])
+    const handleInput = useCallback((v: string) => setTitle(v), [])
 
     const handleInsert = (e: any) => {
         if (e.key === 'Enter') {
             onInsert({ title, content: '' })
+            handleClose()
         }
     }
 

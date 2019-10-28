@@ -2,14 +2,13 @@ import { call, put, takeEvery, takeLatest, all } from 'redux-saga/effects'
 
 import {
     MemoActions,
-
     SELECT_MEMO_REQUEST,
     REMOVE_MEMO_REQUEST,
     UPDATE_MEMO_REQUEST,
     FETCH_MEMO_REQUEST,
 } from '../modules/memo'
 
-import { LabelActions, FETCH_LABEL_REQUEST } from '../modules/label'
+import { FETCH_LABEL_REQUEST } from '../modules/label'
 import { detailMemoAPI, fetchMemoAPI, removeMemoAPI, updateMemoAPI } from '../api/memo'
 
 const fetchMemo = function* () {
@@ -20,7 +19,7 @@ const fetchMemo = function* () {
             yield put(MemoActions.setMemos(data))
         }
     } catch (e) {
-
+        console.error(e)
     }
 }
 
@@ -32,7 +31,7 @@ const detailMemo = function* ({ payload }: any) {
             yield put(MemoActions.setMemo(data))
         }
     } catch (e) {
-        yield put({ type: '', e})
+        console.error(e)
     }
 }
 
@@ -44,6 +43,7 @@ const removeMemo = function* ({ payload }: any) {
             yield put({ type: FETCH_LABEL_REQUEST })
         }
     } catch (e) {
+        console.error(e)
     }
 }
 
@@ -52,9 +52,10 @@ const updateMemo = function* ({ payload }: any) {
         const { status, statusText, data } = yield call(updateMemoAPI, payload)
 
         if (status === 200 && statusText === 'OK') {
+            yield fetchMemo()
         }
     } catch (e) {
-
+        console.error(e)
     }
 }
 
