@@ -37,6 +37,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 : 해당 명령어로 프로젝트를 빌드하여, 최적화 합니다.
 
+### 구동 순서
+
+* 로컬 환경에서 memoapp-api (BE) 구동 됐다고, 가정한 후
+
+```
+yarn install
+yarn dev
+```
+
 ## 프로젝트 구조
 ```
 src
