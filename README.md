@@ -1,44 +1,80 @@
+# myBridge memoapp
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 이용 가능한 스크립트
 
-In the project directory, you can run:
+### `yarn dev`
 
-### `yarn start`
+: 개발 모드로 React App 을 구동합니다. <br />
+브라우저에서 [http://localhost:8080](http://localhost:8080) 해당 경로로 확인 할 수 있습니다.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `yarn prod`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+: 운영 모드로 React App 을 구동합니다. <br />
+브라우저에서 [http://localhost:8080](http://localhost:8080) 해당 경로로 확인 할 수 있습니다.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+: 해당 명령어로 프로젝트를 빌드하여, 최적화 합니다.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 프로젝트 구조
 
-### `yarn eject`
+### `yarn dev`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+: 개발 모드로 React App 을 구동합니다. <br />
+브라우저에서 [http://localhost:8080](http://localhost:8080) 해당 경로로 확인 할 수 있습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `yarn prod`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+: 운영 모드로 React App 을 구동합니다. <br />
+브라우저에서 [http://localhost:8080](http://localhost:8080) 해당 경로로 확인 할 수 있습니다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `yarn build`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+: 해당 명령어로 프로젝트를 빌드하여, 최적화 합니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 프로젝트 구조
+```
+src
+├── components
+│   ├── label
+│   │   ├── Label.spec.ts
+│   │   ├── LabelList.style.ts
+│   │   └── LabelList.tsx
+│   └── memo
+│       ├── Memo.spec.ts
+│       ├── MemoList.style.ts
+│       ├── MemoList.tsx
+│       ├── MemoView.style.ts
+│       └── MemoView.tsx
+├── api
+│   ├── label.ts
+│   └── memo.ts
+├── containers
+│   ├── Index
+│   │   ├── IndexContainer.style.tsx
+│   │   ├── IndexContainer.tsx
+│   │   └── index.tsx
+│   ├── MemoList
+│   │   ├── MemoListContainer.style.tsx
+│   │   ├── MemoListContainer.tsx
+│   │   └── index.tsx
+│   └── MemoView
+│       ├── MemoViewContainer.style.tsx
+│       ├── MemoViewContainer.tsx
+│       └── index.tsx
+├── modules
+│   ├── label.ts
+│   ├── memo.ts
+│   └── index.ts
+├── sagas
+│   ├── label.ts
+│   ├── memo.ts
+│   └── index.ts
+├── App.js
+└── index.js
+```
