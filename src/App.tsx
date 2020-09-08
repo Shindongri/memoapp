@@ -31,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
+
 const App = () => (
     <Provider store={ store }>
         <Router>
